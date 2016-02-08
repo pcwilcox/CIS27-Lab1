@@ -10,6 +10,7 @@ public class DoubleNodeTester {
         list.addToFront("Dick");
         list.addToBack("Harry");
         list.addToFront("Tom");
+        System.out.println("The list is currently " + list.toString());
 
         System.out.println("Let's get the size, it's " + list.getSize() + ".");
 
@@ -19,12 +20,16 @@ public class DoubleNodeTester {
         list.addAfter("Vivian", 3);
         System.out.println("Size is now " + list.getSize() + ".");
 
+        System.out.println("The list is currently " + list.toString());
         list.remove(3);
 
         list.moveToBack(2);
-        list.moveToFront(3);
+        System.out.println("The list is currently " + list.toString());
+        list.moveToFront(2);
+        System.out.println("The list is currently " + list.toString());
         list.popFromFront();
         list.popFromBack();
         list.popFromFront();
+        System.out.println("The list is currently " + list.toString());
     }
 }

@@ -12,6 +12,13 @@ public class DoubleNode<Item> {
         Node next;
         Node previous;
 
+        public String toStringHelper() {
+            if (this.next != null) {
+                return this.item.toString() + ", " + this.next.toStringHelper();
+            } else {
+                return this.item.toString();
+            }
+        }
     }
 
     public DoubleNode(Item i) {
@@ -190,6 +197,7 @@ public class DoubleNode<Item> {
                 current.previous.next = current.next;
             } else {
                 current.next.previous = null;
+                last = current.next;
             }
 
             current.previous = first;
@@ -215,6 +223,14 @@ public class DoubleNode<Item> {
             current.next = last;
             last.previous = current;
             last = current;
+        }
+    }
+
+    public String toString() {
+        if (size > 0) {
+            return "(" + first.toStringHelper() + ")";
+        } else {
+            return "(empty)";
         }
     }
 }
