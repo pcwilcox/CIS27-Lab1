@@ -11,6 +11,7 @@ public class DoubleNode<Item> {
         Item item;
         Node next;
         Node previous;
+
     }
 
     public DoubleNode(Item i) {
@@ -28,26 +29,39 @@ public class DoubleNode<Item> {
         Node temp = new Node();
         temp.item = i;
         temp.previous = first;
-        first.next = temp;
+        if (size > 0) {
+            first.next = temp;
+        } else {
+            last = temp;
+        }
         first = temp;
         size++;
+
+        System.out.println("Added " + temp.item + " to front, size is now " + size + ".");
     }
 
     public void addToBack(Item i) {
         Node temp = new Node();
         temp.item = i;
-        temp.next = last;
-        last.previous = temp;
+
+        if (size > 0) {
+            temp.next = last;
+            last.previous = temp;
+        }
         last = temp;
         size++;
+        System.out.println("Added " + temp.item + " to back, size is now " + size + ".");
     }
 
     public Item popFromFront() {
         if (size > 0) {
-            Node temp = new Node();
-            temp = first;
-            first.previous.next = null;
-            first = first.previous;
+            Node temp = first;
+            if (first.previous != null) {
+                first.previous.next = null;
+                first = first.previous;
+            }
+            size--;
+            System.out.println("Popped " + temp.item + " from front, size is now " + size + ".");
             return temp.item;
         } else {
             return null;
@@ -56,14 +70,24 @@ public class DoubleNode<Item> {
 
     public Item popFromBack() {
         if (size > 0) {
-            Node temp = new Node();
-            temp = last;
+            Node temp = last;
             last.next.previous = null;
             last = last.next;
+            size--;
+            System.out.println("Popped " + temp.item + " from back, size is now " + size + ".");
             return temp.item;
         } else {
             return null;
         }
     }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
 
 }
