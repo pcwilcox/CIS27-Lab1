@@ -1,4 +1,4 @@
-package infix;
+package ArithmeticExpressionEvaluator;
 
 /**
  * Created by Pete on 2/11/2016.
@@ -39,6 +39,9 @@ public class Stack<Item> {
         return null;
     }
 
+    public Item getFirst() {
+        return first.item;
+    }
     public boolean isEmpty() {
         return size == 0;
     }
