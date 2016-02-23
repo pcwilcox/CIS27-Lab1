@@ -40,8 +40,12 @@ public class Stack<Item> {
     }
 
     public Item getFirst() {
-        return first.item;
+        if (first != null) {
+            return first.item;
+        }
+        return null;
     }
+
     public boolean isEmpty() {
         return size == 0;
     }
