@@ -14,11 +14,15 @@ public class DoubleNode<Item> {
         Node next;
         Node previous;
 
+        public String toString() {
+            return "(" + toStringHelper() + ")";
+        }
+
         public String toStringHelper() {
-            if (this.next != null) {
-                return this.item.toString() + ", " + this.next.toStringHelper();
-            } else {
+            if (this.previous == null) {
                 return this.item.toString();
+            } else {
+                return this.item.toString() + ", " + this.previous.toStringHelper();
             }
         }
     }
@@ -229,10 +233,10 @@ public class DoubleNode<Item> {
     }
 
     public String toString() {
-        if (size > 0) {
-            return "(" + first.toStringHelper() + ")";
+        if (first == null) {
+            return null;
         } else {
-            return "(empty)";
+            return first.toString();
         }
     }
 }

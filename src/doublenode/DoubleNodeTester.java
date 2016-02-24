@@ -1,3 +1,4 @@
+
 package doublenode;
 
 import doublenode.DoubleNode;
