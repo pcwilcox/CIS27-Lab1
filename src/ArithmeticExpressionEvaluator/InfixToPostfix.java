@@ -50,9 +50,8 @@ public class InfixToPostfix
 
             } else if (token.equals("*") || token.equals("/"))
             {
-                while (!operators.getFirst().equals("*")
-                       && !operators.getFirst().equals("/")
-                       && !operators.getFirst().equals("("))
+                while (operators.getFirst().equals("+")
+                       && !operators.getFirst().equals("-"))
                 {
                     System.out.println("Popping " + operators.getFirst());
                     buildOutput(operators.pop());

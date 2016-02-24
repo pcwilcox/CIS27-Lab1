@@ -1,8 +1,6 @@
 
 package doublenode;
 
-import doublenode.DoubleNode;
-
 /**
  * Created by Pete on 2/7/2016.
  */
