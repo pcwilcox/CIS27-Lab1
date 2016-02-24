@@ -89,7 +89,7 @@ public class InfixToPostfix
         return output.toString();
     }
 
-    public Stack getOutpot()
+    public Stack getOutput()
     {
         return outputStack;
     }

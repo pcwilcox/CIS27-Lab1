@@ -18,5 +18,11 @@ public class ArithmeticExpressionEvaluator
 
         InfixToPostfix infix2 = new InfixToPostfix("( 1 + ( 3 * ( 4 / ( 8 - ( 12 + 5 ) * 18 ) ) / 4 ) - 6 )");
         System.out.println(infix2.toString());
+
+        Postfix postfix = new Postfix(infix2.getOutput());
+
+        double value = postfix.getOutput();
+
+        System.out.println("The postfix output is: " + value);
     }
 }
