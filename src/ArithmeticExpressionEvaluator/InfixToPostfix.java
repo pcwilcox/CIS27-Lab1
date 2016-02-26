@@ -35,17 +35,17 @@ public class InfixToPostfix
             // First sort out operators
             if (token.equals("("))
             {
-                System.out.println("Pushing " + token + " to stack.");
+                // System.out.println("Pushing " + token + " to stack.");
                 operators.push(token);
             } else if (token.equals("+") || token.equals("-"))
             {
                 if (operators.getFirst().equals("+") || operators.getFirst().equals("-"))
                 {
-                    System.out.println("Popping " + operators.getFirst());
+                   // System.out.println("Popping " + operators.getFirst());
                     buildOutput(operators.pop());
                 }
 
-                System.out.println("Pushing " + token + " to stack.");
+                //System.out.println("Pushing " + token + " to stack.");
                 operators.push(token);
 
             } else if (token.equals("*") || token.equals("/"))
@@ -53,17 +53,17 @@ public class InfixToPostfix
                 while (operators.getFirst().equals("+")
                        && !operators.getFirst().equals("-"))
                 {
-                    System.out.println("Popping " + operators.getFirst());
+                    //System.out.println("Popping " + operators.getFirst());
                     buildOutput(operators.pop());
                 }
-                System.out.println("Pushing " + token + " to stack.");
+                //System.out.println("Pushing " + token + " to stack.");
                 operators.push(token);
             } else if (token.equals(")"))
             {
                 while (!operators.getFirst().equals("("))
                 {
 
-                    System.out.println("Popping " + operators.getFirst());
+                    //System.out.println("Popping " + operators.getFirst());
                     buildOutput(operators.pop());
                 }
                 operators.pop();
@@ -77,7 +77,7 @@ public class InfixToPostfix
 
     private void buildOutput(String exp)
     {
-        System.out.println("Pushing " + exp + " to output.");
+        //System.out.println("Pushing " + exp + " to output.");
         output.append(" " + exp);
         outputStack.push(exp);
 
