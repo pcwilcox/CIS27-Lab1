@@ -3,9 +3,9 @@ package ArithmeticExpressionEvaluator;
 import java.util.Scanner;
 
 /**
- * Created by Lord Yod on 2/24/2016.
+ * Created by Pete Wilcox on 2/24/2016.
  */
-public class Postfix
+public class EvaluatePostfix
 {
     // This class takes a postfix expression, formatted as a whitespace-delimited string, and evaluates it to a double
     private Scanner       input;
@@ -14,7 +14,7 @@ public class Postfix
     private double        output;
     private double        value;
 
-    public Postfix(String exp)
+    public EvaluatePostfix(String exp)
     {
         input = new Scanner(exp);
         operands = new Stack();

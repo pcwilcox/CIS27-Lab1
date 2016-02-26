@@ -1,9 +1,10 @@
 package ArithmeticExpressionEvaluator;
 
 /**
- * Created by Pete on 2/11/2016.
+ * Created by Pete Wilcox on 2/11/2016.
  */
 public class Stack<Item> {
+    // Very simple pushdown stack class
     private Node first;
     private int size = 0;
 
