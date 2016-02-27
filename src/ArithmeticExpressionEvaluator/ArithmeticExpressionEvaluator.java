@@ -7,7 +7,7 @@ public class ArithmeticExpressionEvaluator
 {
     public static void main(String[] args)
     {
-        /*System.out.println("First test: ( 1 + 2 + 3 + 4 )");
+        System.out.println("First test: ( 1 + 2 + 3 + 4 )");
 
         InfixToPostfix infix1 = new InfixToPostfix("( 1 + 2 + 3 + 4 )");
 
@@ -32,7 +32,7 @@ public class ArithmeticExpressionEvaluator
         System.out.println("Postfix: " + infix3.toString());
         EvaluatePostfix evaluatePostfix3 = new EvaluatePostfix(infix3.toString());
         System.out.println("The evaluatePostfix output is: " + evaluatePostfix3.getOutput());
-*/
+
         System.out.println("Final test: ( 81 / 19 * ( 3 * 47 - ( 53 + 17 ) / 18 ) + ( 62 - 7 * ( 15 / 4 ) + 5 ) - 6 )");
 
         InfixToPostfix infix4 = new InfixToPostfix("( 81 / 19 * ( 3 * 47 - ( 53 + 17 ) / 18 ) + ( 62 - 7 * ( 15 / 4 ) + 5 ) - 6 )");
