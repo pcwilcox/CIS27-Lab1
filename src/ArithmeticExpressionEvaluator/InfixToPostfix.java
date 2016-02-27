@@ -20,9 +20,9 @@ public class InfixToPostfix
             constructor with InfixToPostfix(expression), then use .toString() and .getOutput() to use the resulting
             converted expression.
          */
-        output      = new StringBuilder();
-        operators   = new Stack();
-        input       = new Scanner(exp);
+        output = new StringBuilder();
+        operators = new Stack();
+        input = new Scanner(exp);
 
         while (input.hasNext())
         {

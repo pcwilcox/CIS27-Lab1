@@ -2,10 +2,12 @@
 package doublenode;
 
 /**
- * Created by Pete on 2/7/2016.
+ * Created by Pete Wilcox on 2/7/2016.
  */
-public class DoubleNodeTester {
-    public static void main(String[] args) {
+public class DoubleNodeTester
+{
+    public static void main(String[] args)
+    {
         DoubleNode list = new DoubleNode();
         System.out.println("Made a list.");
 

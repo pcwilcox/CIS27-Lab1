@@ -1,51 +1,65 @@
 package doublenode;
 
 /**
- * Created by Pete on 2/6/2016.
+ * Created by Pete Wilcox on 2/6/2016.
  */
-public class DoubleNode<Item> {
+public class DoubleNode<Item>
+{
 
     private Node first;
     private Node last;
-    private int size;
+    private int  size;
 
-    private class Node {
+    private class Node
+    {
         Item item;
         Node next;
         Node previous;
 
-        public String toString() {
+        public String toString()
+        {
             return "(" + toStringHelper() + ")";
         }
 
-        public String toStringHelper() {
-            if (this.previous == null) {
+        // Recursive function to print the list to a string
+        public String toStringHelper()
+        {
+            if (this.previous == null)
+            {
                 return this.item.toString();
-            } else {
+            }
+            else
+            {
                 return this.item.toString() + ", " + this.previous.toStringHelper();
             }
         }
     }
 
-    public DoubleNode(Item i) {
+    public DoubleNode(Item i)
+    {
         first = new Node();
         first.item = i;
         last = first;
         size++;
     }
 
-    public DoubleNode() {
+    public DoubleNode()
+    {
         size = 0;
     }
 
     // Add a node to the front of the list
-    public void addToFront(Item i) {
+    public void addToFront(Item i)
+    {
         Node temp = new Node();
         temp.item = i;
         temp.previous = first;
-        if (size > 0) {
+        if (size > 0)
+        {
             first.next = temp;
-        } else {
+        }
+        else
+        {
             last = temp;
         }
         first = temp;
@@ -55,11 +69,13 @@ public class DoubleNode<Item> {
     }
 
     // Add a node to the back of the list
-    public void addToBack(Item i) {
+    public void addToBack(Item i)
+    {
         Node temp = new Node();
         temp.item = i;
 
-        if (size > 0) {
+        if (size > 0)
+        {
             temp.next = last;
             last.previous = temp;
         }
@@ -69,60 +85,79 @@ public class DoubleNode<Item> {
     }
 
     // Return the first node
-    public Item popFromFront() {
-        if (size > 0) {
+    public Item popFromFront()
+    {
+        if (size > 0)
+        {
             Node temp = first;
-            if (first.previous != null) {
+            if (first.previous != null)
+            {
                 first.previous.next = null;
                 first = first.previous;
             }
             size--;
             System.out.println("Popped " + temp.item + " from front, size is now " + size + ".");
             return temp.item;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
 
     // Return the last node
-    public Item popFromBack() {
-        if (size > 0) {
+    public Item popFromBack()
+    {
+        if (size > 0)
+        {
             Node temp = last;
             last.next.previous = null;
             last = last.next;
             size--;
             System.out.println("Popped " + temp.item + " from back, size is now " + size + ".");
             return temp.item;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
 
     // Return true if the list is empty
-    public boolean isEmpty() {
+    public boolean isEmpty()
+    {
         return size == 0;
     }
 
     // Return the number of nodes
-    public int getSize() {
+    public int getSize()
+    {
         return size;
     }
 
     // Add a node before the nth node
-    public void addBefore(Item item, int n) {
-        if (n < 2) {
+    public void addBefore(Item item, int n)
+    {
+        if (n < 2)
+        {
             addToFront(item);
-        } else if (n > size) {
+        }
+        else if (n > size)
+        {
             addToBack(item);
-        } else {
+        }
+        else
+        {
             Node temp = new Node();
             temp.item = item;
             Node current = first;
-            for (int i = 1; i < n; i++) {
+            for (int i = 1; i < n; i++)
+            {
                 current = current.previous;
             }
 
-            System.out.println("Adding " + temp.item.toString() + " before " + current.item.toString() + " and after " + current.next.item.toString() + ".");
+            System.out.println("Adding " + temp.item.toString() + " before " + current.item.toString() + " and after " +
+                               current.next.item.toString() + ".");
             temp.next = current.next;
             temp.previous = current;
             current.next.previous = temp;
@@ -134,20 +169,28 @@ public class DoubleNode<Item> {
     }
 
     // Add a node after the nth node
-    public void addAfter(Item item, int n) {
-        if (n < 1) {
+    public void addAfter(Item item, int n)
+    {
+        if (n < 1)
+        {
             addToFront(item);
-        } else if (n >= size) {
+        }
+        else if (n >= size)
+        {
             addToBack(item);
-        } else {
+        }
+        else
+        {
             Node temp = new Node();
             temp.item = item;
             Node current = first;
-            for (int i = 1; i < n; i++) {
+            for (int i = 1; i < n; i++)
+            {
                 current = current.previous;
             }
 
-            System.out.println("Adding " + temp.item.toString() + " after " + current.item.toString() + " and before " + current.previous.item.toString() + ".");
+            System.out.println("Adding " + temp.item.toString() + " after " + current.item.toString() + " and before " +
+                               current.previous.item.toString() + ".");
             temp.next = current;
             current.previous.next = temp;
 
@@ -159,25 +202,36 @@ public class DoubleNode<Item> {
     }
 
     // Removes the nth element
-    public void remove(int n) {
-        if (n > 0 && n <= size) {
+    public void remove(int n)
+    {
+        if (n > 0 && n <= size)
+        {
             Node current = first;
-            for (int i = 1; i < n; i++) {
+            for (int i = 1; i < n; i++)
+            {
                 current = current.previous;
             }
 
             System.out.println("Removing " + current.item.toString() + ".");
 
-            if (first == current) {
-                if (current.previous != null) {
+            if (first == current)
+            {
+                if (current.previous != null)
+                {
                     first = current.previous;
-                } else {
+                }
+                else
+                {
                     first = null;
                 }
-            } else if (last == current) {
+            }
+            else if (last == current)
+            {
                 current.next.previous = null;
                 last = current.next;
-            } else {
+            }
+            else
+            {
                 current.next.previous = current.previous;
                 current.previous.next = current.next;
             }
@@ -189,19 +243,25 @@ public class DoubleNode<Item> {
     }
 
     // Move the nth node to the front
-    public void moveToFront(int n) {
-        if (n > 1 && n <= size) {
+    public void moveToFront(int n)
+    {
+        if (n > 1 && n <= size)
+        {
             Node current = first;
-            for (int i = 1; i <= n; i++) {
+            for (int i = 1; i <= n; i++)
+            {
                 current = current.previous;
             }
 
             System.out.println("Moving " + current.item.toString() + " to the front of the list.");
 
-            if (current.previous != null) {
+            if (current.previous != null)
+            {
                 current.next.previous = current.previous;
                 current.previous.next = current.next;
-            } else {
+            }
+            else
+            {
                 current.next.previous = null;
                 last = current.next;
             }
@@ -214,10 +274,13 @@ public class DoubleNode<Item> {
     }
 
     // Move the nth node to the back
-    public void moveToBack(int n) {
-        if (n > 0 && n < size) {
+    public void moveToBack(int n)
+    {
+        if (n > 0 && n < size)
+        {
             Node current = first;
-            for (int i = 1; i <= n; i++) {
+            for (int i = 1; i <= n; i++)
+            {
                 current = current.previous;
             }
 
@@ -232,10 +295,14 @@ public class DoubleNode<Item> {
         }
     }
 
-    public String toString() {
-        if (first == null) {
+    public String toString()
+    {
+        if (first == null)
+        {
             return null;
-        } else {
+        }
+        else
+        {
             return first.toString();
         }
     }
