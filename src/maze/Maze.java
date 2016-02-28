@@ -19,8 +19,7 @@ public class Maze
 
     private class Room
     {
-        int     hid;
-        int     wid;
+        Room    root;
         boolean up;
         boolean down;
         boolean right;
@@ -53,8 +52,7 @@ public class Maze
             for (int j = 0; j < width; ++j)
             {
                 Room r = rooms[i][j];
-                r.hid = i;
-                r.wid = j;
+                r.root = r;
                 r.height = i;
                 r.width = j;
                 r.up = true;
@@ -70,10 +68,13 @@ public class Maze
         start = rooms[0][roomSelector.nextInt(width)];
         finish = rooms[height][roomSelector.nextInt(width)];
 
-        while (start.size != this.size)
+        // Knock down random walls until every room is connected in one component
+        while (start.root.size != this.size)
         {
             wallRemover(roomSelector.nextInt(height), roomSelector.nextInt(width));
         }
+
+        displayMaze();
     }
 
     private void wallRemover(int h, int w)
@@ -86,6 +87,7 @@ public class Maze
                 {
                     rooms[h][w].down = false;
                     rooms[h + 1][w].up = false;
+                    union(rooms[h][w], rooms[h + 1][w]);
                 }
             }
         }
@@ -96,7 +98,8 @@ public class Maze
                 if (!connected(rooms[h][w], rooms[h][w + 1]))
                 {
                     rooms[h][w].right = false;
-                    rooms[h + 1][w].up = false;
+                    rooms[h][w + 1].left = false;
+                    union(rooms[h][w], rooms[h][w + 1]);
                 }
             }
         }
@@ -113,15 +116,67 @@ public class Maze
 
     private Room root(Room p)
     {
-        while (p.hid != p.height && p.wid != p.width)
+        while (!p.root.equals(p))
         {
-            p = rooms[p.hid][p.wid];
+            p = p.root;
         }
         return p;
     }
 
     private void union(Room p, Room r)
     {
+        Room pRoot = root(p);
+        Room rRoot = root(r);
+        if (pRoot.equals(rRoot))
+        {
+            return;
+        }
+
+        if (pRoot.size >= rRoot.size)
+        {
+            rRoot.root = pRoot;
+            rRoot.size++;
+        }
+        else
+        {
+            pRoot.root = rRoot;
+            pRoot.size++;
+        }
+    }
+
+    private void displayMaze()
+    {
+        for (int i = 0; i < width; ++i)
+        {
+            System.out.print('_');
+        }
+
+
+        for (int i = 0; i < height; ++i)
+        {
+            System.out.print('\n');
+            System.out.print('|');
+            for (int j = 0; j < width; ++j)
+            {
+                if (rooms[i][j].down)
+                {
+                    System.out.print('_');
+                }
+                else
+                {
+                    System.out.print(' ');
+                }
+                if (rooms[i][j].right)
+                {
+                    System.out.print('|');
+                }
+                else
+                {
+                    System.out.print(' ');
+                }
+
+            }
+        }
 
     }
 }
