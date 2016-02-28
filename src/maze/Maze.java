@@ -27,6 +27,7 @@ public class Maze
         boolean left;
         int     height;
         int     width;
+        int     size;
 
         boolean equals(Room p)
         {
@@ -60,6 +61,7 @@ public class Maze
                 r.down = true;
                 r.left = true;
                 r.right = true;
+                r.size = 1;
             }
         }
 
@@ -68,7 +70,7 @@ public class Maze
         start = rooms[0][roomSelector.nextInt(width)];
         finish = rooms[height][roomSelector.nextInt(width)];
 
-        while (!connected(start, finish))
+        while (start.size != this.size)
         {
             wallRemover(roomSelector.nextInt(height), roomSelector.nextInt(width));
         }
@@ -76,7 +78,28 @@ public class Maze
 
     private void wallRemover(int h, int w)
     {
-
+        if (h < height)
+        {
+            if (rooms[h][w].down == true)
+            {
+                if (!connected(rooms[h][w], rooms[h + 1][w]))
+                {
+                    rooms[h][w].down = false;
+                    rooms[h + 1][w].up = false;
+                }
+            }
+        }
+        else if (w < width)
+        {
+            if (rooms[h][w].right == true)
+            {
+                if (!connected(rooms[h][w], rooms[h][w + 1]))
+                {
+                    rooms[h][w].right = false;
+                    rooms[h + 1][w].up = false;
+                }
+            }
+        }
     }
 
     private boolean connected(Room p, Room q)
@@ -95,5 +118,10 @@ public class Maze
             p = rooms[p.hid][p.wid];
         }
         return p;
+    }
+
+    private void union(Room p, Room r)
+    {
+
     }
 }
