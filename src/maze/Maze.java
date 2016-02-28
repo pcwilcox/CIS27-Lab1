@@ -1,5 +1,6 @@
 package maze;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -9,28 +10,42 @@ import java.util.Random;
 public class Maze
 {
     // This class creates a maze
-    private int      height;
-    private int      width;
-    private int      size;
-    private Room[][] rooms;
-    private Room     start;
-    private Room     finish;
-    private Random   roomSelector;
+    private int             width;
+    private int             height;
+    private int             size;
+    private Room[][]        rooms;
+    private Room            start;
+    private Room            finish;
+    private Random          roomSelector;
+    private ArrayList<Room> roomList;
 
+    // The maze is an array of Room objects
     private class Room
     {
-        Room    root;
+        // Root of the tree
+        Room root;
+
+        // True if there is a wall on this side
         boolean up;
         boolean down;
         boolean right;
         boolean left;
-        int     height;
-        int     width;
-        int     size;
+
+        // Coordinates of the room
+        int width;
+        int height;
+
+        // Size of the tree
+        int size;
+
+        public String toString()
+        {
+            return "[" + height + "," + width + "]";
+        }
 
         boolean equals(Room p)
         {
-            if (p.height == this.height && p.width == this.width)
+            if (p.width == this.width && p.height == this.height)
             {
                 return true;
             }
@@ -41,70 +56,124 @@ public class Maze
     public Maze(int h, int w)
     {
         // Set the initial values of the maze
-        height = h;
-        width = w;
-        size = height * width;
-        rooms = new Room[height][width];
+        this.width = h;
+        this.height = w;
+        size = this.width * this.height;
+        rooms = new Room[this.width][this.height];
+        roomList = new ArrayList<>();
+
+        System.out.println("Creating a " + this.width + "x" + this.height + " maze with " + size + " rooms.");
 
         // Go through each room and record its height/width, set its walls to true
-        for (int i = 0; i < height; ++i)
+        for (int i = 0; i < this.width; ++i)
         {
-            for (int j = 0; j < width; ++j)
+            for (int j = 0; j < this.height; ++j)
             {
+                rooms[i][j] = new Room();
                 Room r = rooms[i][j];
                 r.root = r;
-                r.height = i;
-                r.width = j;
+                r.width = i;
+                r.height = j;
                 r.up = true;
                 r.down = true;
                 r.left = true;
                 r.right = true;
                 r.size = 1;
+                roomList.add(r);
+                System.out.println("Created " + r.toString());
             }
         }
 
         // Select random rooms for start and finish, these will be on opposite edges
         roomSelector = new Random();
-        start = rooms[0][roomSelector.nextInt(width)];
-        finish = rooms[height][roomSelector.nextInt(width)];
+        start = rooms[0][roomSelector.nextInt(this.height)];
+        finish = rooms[this.width - 1][roomSelector.nextInt(this.height)];
+
+        System.out.println("Start: " + start.toString());
+        System.out.println("Finish: " + finish.toString());
 
         // Knock down random walls until every room is connected in one component
         while (start.root.size != this.size)
         {
-            wallRemover(roomSelector.nextInt(height), roomSelector.nextInt(width));
+            wallRemover(roomList.get(roomSelector.nextInt(roomList.size() - 1)));
         }
+
+        System.out.println("All rooms connected, displaying maze:");
 
         displayMaze();
     }
 
-    private void wallRemover(int h, int w)
+    // Knocks down the right or down wall of a given room
+    private void wallRemover(Room r)
     {
-        if (h < height)
+        // Go through the four walls of the room, if we can knock one down, do so and return
+        if (r.width < this.width - 1)
         {
-            if (rooms[h][w].down == true)
+            if (r.right == true)
             {
-                if (!connected(rooms[h][w], rooms[h + 1][w]))
+                if (!connected(r, rooms[r.width + 1][r.height]))
                 {
-                    rooms[h][w].down = false;
-                    rooms[h + 1][w].up = false;
-                    union(rooms[h][w], rooms[h + 1][w]);
+                    r.right = false;
+                    rooms[r.width + 1][r.height].left = false;
+                    union(r, rooms[r.width + 1][r.height]);
+                    System.out
+                            .println("Connecting " + r.toString() + " with " + rooms[r.width + 1][r.height].toString());
+                    return;
                 }
             }
         }
-        else if (w < width)
+
+        if (r.height < this.height - 1)
         {
-            if (rooms[h][w].right == true)
+            if (r.down == true)
             {
-                if (!connected(rooms[h][w], rooms[h][w + 1]))
+                if (!connected(r, rooms[r.width][r.height + 1]))
                 {
-                    rooms[h][w].right = false;
-                    rooms[h][w + 1].left = false;
-                    union(rooms[h][w], rooms[h][w + 1]);
+                    r.down = false;
+                    rooms[r.width][r.height + 1].up = false;
+                    union(r, rooms[r.width][r.height + 1]);
+                    System.out
+                            .println("Connecting " + r.toString() + " with " + rooms[r.width][r.height + 1].toString());
+                    return;
                 }
             }
         }
+
+        if (r.height > 0)
+        {
+            if (r.up == true)
+            {
+                if (!connected(r, rooms[r.width][r.height - 1]))
+                {
+                    r.up = false;
+                    rooms[r.width][r.height - 1].down = false;
+                    union(r, rooms[r.width][r.height - 1]);
+                    System.out
+                            .println("Connecting " + r.toString() + " with " + rooms[r.width][r.height - 1].toString());
+                }
+            }
+        }
+
+        if (r.width > 0)
+        {
+            if (r.left == true)
+            {
+                if (!connected(r, rooms[r.width - 1][r.height]))
+                {
+                    r.left = false;
+                    rooms[r.width -1][r.height].right = false;
+                    union(r, rooms[r.width-1][r.height]);
+                    System.out
+                            .println("Connecting " + r.toString() + " with " + rooms[r.width-1][r.height].toString());
+                }
+            }
+        }
+        System.out.println("Can't knock down walls in " + r.toString());
+        roomList.remove(r);
+
     }
 
+    // Return true if two rooms are in the same tree
     private boolean connected(Room p, Room q)
     {
         if (root(p) == root(q))
@@ -114,6 +183,7 @@ public class Maze
         return false;
     }
 
+    // Returns root of a room's tree
     private Room root(Room p)
     {
         while (!p.root.equals(p))
@@ -123,40 +193,45 @@ public class Maze
         return p;
     }
 
+    // Join two trees
     private void union(Room p, Room r)
     {
         Room pRoot = root(p);
         Room rRoot = root(r);
+
+        // If the two rooms have the same root, do nothing
         if (pRoot.equals(rRoot))
         {
             return;
         }
 
+        // Figure out which tree is smaller, join it to the larger tree
         if (pRoot.size >= rRoot.size)
         {
             rRoot.root = pRoot;
-            rRoot.size++;
+            rRoot.size += pRoot.size;
         }
         else
         {
             pRoot.root = rRoot;
-            pRoot.size++;
+            pRoot.size += rRoot.size;
         }
     }
 
+    // Show the maze at the end
     private void displayMaze()
     {
-        for (int i = 0; i < width; ++i)
+        for (int i = 0; i < height; ++i)
         {
             System.out.print('_');
         }
 
 
-        for (int i = 0; i < height; ++i)
+        for (int i = 0; i < width; ++i)
         {
             System.out.print('\n');
             System.out.print('|');
-            for (int j = 0; j < width; ++j)
+            for (int j = 0; j < height; ++j)
             {
                 if (rooms[i][j].down)
                 {
