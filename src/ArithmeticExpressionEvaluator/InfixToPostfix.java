@@ -78,56 +78,10 @@ public class InfixToPostfix
                     buildOutput(token);
 
             }
-//            if (token.equals("("))
-//            {
-//                operators.push(token);
-//            }
-//            else if (token.equals("+") || token.equals("-"))
-//            {
-//                // If the operator on top of the stack has higher, push it to output
-//                while (operators.getFirst().equals("*") || operators.getFirst().equals("/"))
-//                {
-//                    buildOutput(operators.pop());
-//                }
-//
-//                // If the operator on top of the stack has equal precedence, push it to output
-//                if (operators.getFirst().equals("+") || operators.getFirst().equals("-"))
-//                {
-//                    buildOutput(operators.pop());
-//                }
-//
-//                // Then push the token operator
-//                operators.push(token);
-//
-//            }
-//            else if (token.equals("*") || token.equals("/"))
-//            {
-//                // Same thing applies here except of course you only pop if it's equal precedence
-//                while (operators.getFirst().equals("*") || operators.getFirst().equals("/"))
-//                {
-//                    buildOutput(operators.pop());
-//                }
-//                operators.push(token);
-//            }
-//            else if (token.equals(")"))
-//            {
-//                // When you get a ), pop all operators until you get the matching ( and push them to output
-//                while (!operators.getFirst().equals("("))
-//                {
-//
-//                    buildOutput(operators.pop());
-//                }
-//                // Then get rid of the ()'s
-//                operators.pop();
-//            }
-//            else
-//            {
-//                // The token is an operand, so it goes straight to the output
-//                buildOutput(token);
-//            }
         }
     }
 
+    // Builds the output expression, helper method called by the constructor
     private void buildOutput(String exp)
     {
         output.append(" " + exp);

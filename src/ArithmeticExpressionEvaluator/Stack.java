@@ -4,7 +4,7 @@ package ArithmeticExpressionEvaluator;
  * Created by Pete Wilcox on 2/11/2016.
  */
 public class Stack<Item> {
-    // Very simple pushdown stack class
+    // Very simple LIFO stack class
     private Node first;
     private int size = 0;
 
@@ -13,15 +13,18 @@ public class Stack<Item> {
         Node next;
     }
 
+    // Constructor
     public Stack(Item i) {
         first = new Node();
         first.item = i;
         size++;
     }
 
+    // Default constructor
     public Stack() {
     }
 
+    // Push a new item to the stack
     public void push(Item i) {
         Node temp = new Node();
         temp.item = i;
@@ -30,6 +33,7 @@ public class Stack<Item> {
         size++;
     }
 
+    // Pop the first item from the stack
     public Item pop() {
         if (size > 0) {
             Node temp = first;
@@ -40,6 +44,7 @@ public class Stack<Item> {
         return null;
     }
 
+    // Returns the item held in the first node - used for checking equality
     public Item getFirst() {
         if (first != null) {
             return first.item;

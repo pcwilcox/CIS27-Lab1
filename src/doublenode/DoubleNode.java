@@ -140,10 +140,12 @@ public class DoubleNode<Item>
     {
         if (n < 2)
         {
+            // Adding a node before element 0 or 1 is the same as adding it to the front
             addToFront(item);
         }
         else if (n > size)
         {
+            // Adding a node after the last element is the same as adding it to the back
             addToBack(item);
         }
         else
@@ -173,10 +175,12 @@ public class DoubleNode<Item>
     {
         if (n < 1)
         {
+            // Adding after any element before the first one is the same as adding to the front
             addToFront(item);
         }
         else if (n >= size)
         {
+            // Adding after the last element is the same as adding to the back
             addToBack(item);
         }
         else
@@ -186,6 +190,7 @@ public class DoubleNode<Item>
             Node current = first;
             for (int i = 1; i < n; i++)
             {
+                // Iterate through the list until you get to the nth element
                 current = current.previous;
             }
 
@@ -206,14 +211,17 @@ public class DoubleNode<Item>
     {
         if (n > 0 && n <= size)
         {
+            // Can't remove an element outside the list
             Node current = first;
             for (int i = 1; i < n; i++)
             {
+                // Iterate through to the nth element
                 current = current.previous;
             }
 
             System.out.println("Removing " + current.item.toString() + ".");
 
+            // Special conditions apply if the element to be removed is either the first or the last
             if (first == current)
             {
                 if (current.previous != null)
@@ -295,6 +303,7 @@ public class DoubleNode<Item>
         }
     }
 
+    // Wrapper function
     public String toString()
     {
         if (first == null)
