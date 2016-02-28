@@ -1,4 +1,4 @@
-package ArithmeticExpressionEvaluator;
+package arithmeticExpressionEvaluator;
 
 /**
  * Created by Pete Wilcox on 2/23/2016.

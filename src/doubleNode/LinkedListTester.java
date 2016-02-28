@@ -1,14 +1,14 @@
 
-package doublenode;
+package doubleNode;
 
 /**
  * Created by Pete Wilcox on 2/7/2016.
  */
-public class DoubleNodeTester
+public class LinkedListTester
 {
     public static void main(String[] args)
     {
-        DoubleNode list = new DoubleNode();
+        LinkedList list = new LinkedList();
         System.out.println("Made a list.");
 
         System.out.println("Currently the list is empty: " + list.isEmpty());

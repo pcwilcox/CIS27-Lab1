@@ -1,21 +1,22 @@
-package doublenode;
+package doubleNode;
 
 /**
  * Created by Pete Wilcox on 2/6/2016.
  */
-public class DoubleNode<Item>
+public class LinkedList<Item>
 {
 
-    private Node first;
-    private Node last;
-    private int  size;
+    private DoubleNode first;
+    private DoubleNode last;
+    private int        size;
 
-    private class Node
+    private class DoubleNode
     {
-        Item item;
-        Node next;
-        Node previous;
+        Item       item;
+        DoubleNode next;
+        DoubleNode previous;
 
+        // Calls the recursive helper function
         public String toString()
         {
             return "(" + toStringHelper() + ")";
@@ -35,15 +36,17 @@ public class DoubleNode<Item>
         }
     }
 
-    public DoubleNode(Item i)
+    // Constructor
+    public LinkedList(Item i)
     {
-        first = new Node();
+        first = new DoubleNode();
         first.item = i;
         last = first;
         size++;
     }
 
-    public DoubleNode()
+    // Default constructor
+    public LinkedList()
     {
         size = 0;
     }
@@ -51,7 +54,7 @@ public class DoubleNode<Item>
     // Add a node to the front of the list
     public void addToFront(Item i)
     {
-        Node temp = new Node();
+        DoubleNode temp = new DoubleNode();
         temp.item = i;
         temp.previous = first;
         if (size > 0)
@@ -71,7 +74,7 @@ public class DoubleNode<Item>
     // Add a node to the back of the list
     public void addToBack(Item i)
     {
-        Node temp = new Node();
+        DoubleNode temp = new DoubleNode();
         temp.item = i;
 
         if (size > 0)
@@ -89,7 +92,7 @@ public class DoubleNode<Item>
     {
         if (size > 0)
         {
-            Node temp = first;
+            DoubleNode temp = first;
             if (first.previous != null)
             {
                 first.previous.next = null;
@@ -110,7 +113,7 @@ public class DoubleNode<Item>
     {
         if (size > 0)
         {
-            Node temp = last;
+            DoubleNode temp = last;
             last.next.previous = null;
             last = last.next;
             size--;
@@ -150,9 +153,9 @@ public class DoubleNode<Item>
         }
         else
         {
-            Node temp = new Node();
+            DoubleNode temp = new DoubleNode();
             temp.item = item;
-            Node current = first;
+            DoubleNode current = first;
             for (int i = 1; i < n; i++)
             {
                 current = current.previous;
@@ -185,9 +188,9 @@ public class DoubleNode<Item>
         }
         else
         {
-            Node temp = new Node();
+            DoubleNode temp = new DoubleNode();
             temp.item = item;
-            Node current = first;
+            DoubleNode current = first;
             for (int i = 1; i < n; i++)
             {
                 // Iterate through the list until you get to the nth element
@@ -212,7 +215,7 @@ public class DoubleNode<Item>
         if (n > 0 && n <= size)
         {
             // Can't remove an element outside the list
-            Node current = first;
+            DoubleNode current = first;
             for (int i = 1; i < n; i++)
             {
                 // Iterate through to the nth element
@@ -255,7 +258,7 @@ public class DoubleNode<Item>
     {
         if (n > 1 && n <= size)
         {
-            Node current = first;
+            DoubleNode current = first;
             for (int i = 1; i <= n; i++)
             {
                 current = current.previous;
@@ -286,7 +289,7 @@ public class DoubleNode<Item>
     {
         if (n > 0 && n < size)
         {
-            Node current = first;
+            DoubleNode current = first;
             for (int i = 1; i <= n; i++)
             {
                 current = current.previous;

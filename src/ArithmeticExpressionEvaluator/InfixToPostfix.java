@@ -1,4 +1,4 @@
-package ArithmeticExpressionEvaluator;
+package arithmeticExpressionEvaluator;
 
 import java.util.Scanner;
 
