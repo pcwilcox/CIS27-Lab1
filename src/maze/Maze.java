@@ -102,6 +102,9 @@ public class Maze
         System.out.println("All rooms connected, displaying maze:");
 
         displayMaze();
+        System.out.print('\n');
+        System.out.println("Start: " + start + ", root: " + root(start));
+        System.out.println("Finish: " + finish + ", root: " + root(finish));
     }
 
     // Knocks down the right or down wall of a given room
