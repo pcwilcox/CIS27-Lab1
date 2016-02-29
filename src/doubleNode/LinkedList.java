@@ -2,6 +2,7 @@ package doubleNode;
 
 /**
  * Created by Pete Wilcox on 2/6/2016.
+ * petercwilcox@gmail.com
  */
 public class LinkedList<Item>
 {
