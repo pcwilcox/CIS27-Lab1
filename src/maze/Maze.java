@@ -19,6 +19,7 @@ public class Maze
     private Random          roomSelector;
     private ArrayList<Room> roomList;
 
+
     // The maze is an array of Room objects
     private class Room
     {
@@ -40,7 +41,7 @@ public class Maze
 
         public String toString()
         {
-            return "[" + height + "," + width + "]";
+            return "[" + width + "," + height + "]";
         }
 
         boolean equals(Room p)
@@ -93,9 +94,9 @@ public class Maze
         System.out.println("Finish: " + finish.toString());
 
         // Knock down random walls until every room is connected in one component
-        while (start.root.size != this.size)
+        while (roomList.size() > 0)
         {
-            wallRemover(roomList.get(roomSelector.nextInt(roomList.size() - 1)));
+            wallRemover(roomList.get(roomSelector.nextInt(roomList.size())));
         }
 
         System.out.println("All rooms connected, displaying maze:");
@@ -107,7 +108,7 @@ public class Maze
     private void wallRemover(Room r)
     {
         // Go through the four walls of the room, if we can knock one down, do so and return
-        if (r.width < this.width - 1)
+        if (r.width < this.width - 2)
         {
             if (r.right == true)
             {
@@ -123,7 +124,7 @@ public class Maze
             }
         }
 
-        if (r.height < this.height - 1)
+        if (r.height < this.height - 2)
         {
             if (r.down == true)
             {
@@ -150,6 +151,7 @@ public class Maze
                     union(r, rooms[r.width][r.height - 1]);
                     System.out
                             .println("Connecting " + r.toString() + " with " + rooms[r.width][r.height - 1].toString());
+                    return;
                 }
             }
         }
@@ -165,6 +167,7 @@ public class Maze
                     union(r, rooms[r.width-1][r.height]);
                     System.out
                             .println("Connecting " + r.toString() + " with " + rooms[r.width-1][r.height].toString());
+                    return;
                 }
             }
         }
@@ -221,19 +224,20 @@ public class Maze
     // Show the maze at the end
     private void displayMaze()
     {
-        for (int i = 0; i < height; ++i)
+        for (int i = 0; i < width; ++i)
         {
+            System.out.print('_');
             System.out.print('_');
         }
 
 
-        for (int i = 0; i < width; ++i)
+        for (int i = 0; i < height; ++i)
         {
             System.out.print('\n');
             System.out.print('|');
-            for (int j = 0; j < height; ++j)
+            for (int j = 0; j < width; ++j)
             {
-                if (rooms[i][j].down)
+                if (rooms[j][i].down)
                 {
                     System.out.print('_');
                 }
@@ -241,7 +245,7 @@ public class Maze
                 {
                     System.out.print(' ');
                 }
-                if (rooms[i][j].right)
+                if (rooms[j][i].right)
                 {
                     System.out.print('|');
                 }

@@ -8,6 +8,6 @@ public class MazeTester
 {
     public static void main(String[] args)
     {
-        Maze maze = new Maze(5, 5);
+        Maze maze = new Maze(50, 50);
     }
 }
