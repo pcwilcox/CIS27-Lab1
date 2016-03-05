@@ -44,3 +44,20 @@ public class ArithmeticExpressionEvaluator
         System.out.println("The final output is: " + evaluatePostfix4.getOutput());
     }
 }
+
+/* Program output:
+First test: ( 1 + 2 + 3 + 4 )
+Postfix:  1 2 + 3 + 4 +
+First output: 10.0
+Ok that seems to have worked, let's try a more complicated one: ( 1 + ( 3 * ( 4 / ( 8 - ( 12 + 5 ) * 18 ) ) / 4 ) - 6 )
+Postfix:  1 3 4 8 12 5 + 18 * - / * 4 / + 6 -
+The evaluatePostfix output is: -5.010067114093959
+Ok that worked, let's try another: ( 19 - 47 + ( 83 / ( 4 * 23 - 8 ) + 53 / 8 + 19 ) * 3 + 43 )
+Postfix:  19 47 - 83 4 23 * 8 - / 53 8 / + 19 + 3 * + 43 +
+The evaluatePostfix output is: 94.83928571428571
+Final test: ( 81 / 19 * ( 3 * 47 - ( 53 + 17 ) / 18 ) + ( 62 - 7 * ( 15 / 4 ) + 5 ) - 6 )
+Postfix:  81 19 / 3 47 * 53 17 + 18 / - * 62 7 15 4 / * - 5 + + 6 -
+The final output is: 619.2763157894738
+
+Process finished with exit code 0
+ */

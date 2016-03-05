@@ -1,4 +1,4 @@
-package doubleNode;
+package linkedList;
 
 /**
  * Created by Pete Wilcox on 2/6/2016.
